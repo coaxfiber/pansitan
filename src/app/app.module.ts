@@ -1,79 +1,75 @@
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import {WelcomePage} from '../pages/welcome/welcome';
-import {PropertyListPage} from '../pages/property-list/property-list';
-import {PropertyDetailPage} from '../pages/property-detail/property-detail';
-import {BrokerListPage} from '../pages/broker-list/broker-list';
-import {BrokerDetailPage} from '../pages/broker-detail/broker-detail';
-import {FavoriteListPage} from '../pages/favorite-list/favorite-list';
-import {AboutPage} from '../pages/about/about';
-import {AccountPage} from '../pages/account/account';
-import {AddstayinnPage} from '../pages/addstayinn/addstayinn';
 
-import {PropertyService} from "../providers/property-service-mock";
-import {BrokerService} from "../providers/broker-service-mock";
+import { Home } from '../pages/home/home';
+import { PostPopover } from '../pages/home/post-popover';
+import { Search } from '../pages/search/search';
+import { ModalPost } from '../pages/modal-post/modal-post';
+import { Messages } from '../pages/messages/messages';
+import { MessageDetail } from '../pages/message-detail/message-detail';
+import { NewMessage } from '../pages/new-message/new-message';
+import { Notifications } from '../pages/notifications/notifications';
+import { Profile } from '../pages/profile/profile';
+import { EditProfile } from '../pages/edit-profile/edit-profile';
+import { TaggedProfile } from '../pages/tagged-profile/tagged-profile';
+import { SavedProfile } from '../pages/saved-profile/saved-profile';
+import { Options } from '../pages/options/options';
+import { Comments } from '../pages/comments/comments';
+import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { FacebookModule } from 'ngx-facebook';
-import { Facebook } from '@ionic-native/facebook';
-import { GlobalvarsProvider } from '../providers/globalvars/globalvars';
 import { Camera } from '@ionic-native/camera';
-import { Transfer } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path';
 
-import { AdMobFree } from '@ionic-native/admob-free';
 @NgModule({
   declarations: [
     MyApp,
-    WelcomePage,
-    AboutPage,
-    PropertyListPage,
-    PropertyDetailPage,
-    FavoriteListPage,
-    BrokerListPage,
-    BrokerDetailPage,
-    AddstayinnPage,
-    AccountPage
-
+    Home,
+    PostPopover,
+    Search,
+    ModalPost,
+    Messages,
+    MessageDetail,
+    NewMessage,
+    Notifications,
+    Profile,
+    EditProfile,
+    TaggedProfile,
+    SavedProfile,
+    Options,
+    Comments,
+    TabsPage
   ],
   imports: [
     BrowserModule,
-    HttpModule,
-    IonicModule.forRoot(MyApp),
-    FacebookModule.forRoot(),
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    WelcomePage,
-    AboutPage,
-    AddstayinnPage,
-    PropertyListPage,
-    PropertyDetailPage,
-    FavoriteListPage,
-    BrokerListPage,
-    BrokerDetailPage,
-    AccountPage,
+    Home,
+    PostPopover,
+    Search,
+    ModalPost,
+    Messages,
+    MessageDetail,
+    NewMessage,
+    Notifications,
+    Profile,
+    EditProfile,
+    TaggedProfile,
+    SavedProfile,
+    Options,
+    Comments,
+    TabsPage
   ],
-  providers: [ 
-    Transfer,
-    File,
-    Camera,
-    AdMobFree,
-    FilePath,
+  providers: [
     StatusBar,
     SplashScreen,
-    PropertyService,
-    BrokerService,SplashScreen, StatusBar, Facebook,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}, GlobalvarsProvider,
-    
+    Camera,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
-  
