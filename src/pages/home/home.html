@@ -6,7 +6,7 @@
       </button>
     </ion-buttons>
     
-    <ion-title style="border: 1px solid #ccc" (click)="scrollToTop()">InstaClone</ion-title>
+    <ion-title style="border: 1px solid #ccc" (click)="scrollToTop()">Pansitan</ion-title>
 
     <ion-buttons end right>
       <button color="black" ion-button icon-only (click)="goMessages()">
@@ -18,7 +18,7 @@
 
 <ion-content>
 
-  <!-- Story line -->
+  <!-- Story line 
   <ion-scroll class="story" scrollX="true">
     <div class="story_scroll" *ngFor="let s of stories">
       <div class="story_img_bg">
@@ -26,7 +26,7 @@
       <p no-margin no-padding text-center class="story_text">{{ s.user_name }}</p>
     </div>
   </ion-scroll>
-
+-->
   <hr no-margin no-padding>
   <div (swipe)="swipePage($event)">
 

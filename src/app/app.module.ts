@@ -18,10 +18,16 @@ import { SavedProfile } from '../pages/saved-profile/saved-profile';
 import { Options } from '../pages/options/options';
 import { Comments } from '../pages/comments/comments';
 import { TabsPage } from '../pages/tabs/tabs';
-
+import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Camera } from '@ionic-native/camera';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { PropertyService } from '../providers/property-service-mock/property-service-mock';
+
+import { PropertyListPage } from '../pages/property-list/property-list';
+import { PropertyDetailPage } from '../pages/property-detail/property-detail';
+import { AdMobFree } from '@ionic-native/admob-free';
 
 @NgModule({
   declarations: [
@@ -40,10 +46,13 @@ import { Camera } from '@ionic-native/camera';
     SavedProfile,
     Options,
     Comments,
-    TabsPage
+    TabsPage,
+    PropertyListPage,
+    PropertyDetailPage
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -63,13 +72,18 @@ import { Camera } from '@ionic-native/camera';
     SavedProfile,
     Options,
     Comments,
-    TabsPage
+    TabsPage,
+    PropertyListPage,
+    PropertyDetailPage
   ],
   providers: [
+   GooglePlus,
     StatusBar,
     SplashScreen,
+    AdMobFree,
     Camera,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PropertyService
   ]
 })
 export class AppModule {}

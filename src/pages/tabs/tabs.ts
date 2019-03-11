@@ -4,6 +4,7 @@ import { Home } from '../home/home';
 import { Search } from '../search/search';
 import { Notifications } from '../notifications/notifications';
 import { Profile } from '../profile/profile';
+import { PropertyListPage } from '../property-list/property-list';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -17,6 +18,7 @@ export class TabsPage {
   // tab3Root = null;
   tab4Root = Notifications;
   tab5Root = Profile;
+  tab6Root = PropertyListPage;
 
   constructor(private camera: Camera) {
 
@@ -33,7 +35,7 @@ export class TabsPage {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      //let base64Image = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
       // Handle error
     });

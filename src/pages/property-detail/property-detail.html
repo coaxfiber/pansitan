@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Pansitan</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngIf="property.id">
+        <img src="{{property.picture}}"/>
+        <ion-card-content>
+            <h2 class="card-title">{{property.title}}</h2>
+            <p>{{property.address}}</p>
+        </ion-card-content>
+        <ion-list>
+
+            <ion-item>
+                <ion-icon item-left name="list-box"></ion-icon>
+                <h3>Type</h3>
+                <ion-note item-right>{{property.type}}</ion-note>
+            </ion-item>
+            <ion-item>
+                <ion-icon item-left name="call"></ion-icon>
+                <h3>Contact</h3>
+                <ion-note item-right>{{property.contact}}</ion-note>
+            </ion-item>
+            <ion-item>
+                <ion-icon item-left name="pricetag"></ion-icon>
+                <h3>Asking Price</h3>
+                <ion-note item-right>{{property.price}}</ion-note>
+            </ion-item>
+        </ion-list>
+
+        
+
+    </ion-card>
+</ion-content>
