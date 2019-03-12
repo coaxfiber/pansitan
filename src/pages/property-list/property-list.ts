@@ -19,8 +19,6 @@ export class PropertyListPage {
     map;
     markersGroup;
     constructor(public navCtrl: NavController, public service: PropertyService, public config: Config,private http:Http) {
-
-
      this.http.get('http://pmt.i-tugue.com/stayinn-backend/api.php?action=get_app_list')
           .map(response => response.json())
           .subscribe(res => this.properties = res);

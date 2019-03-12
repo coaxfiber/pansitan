@@ -93,5 +93,9 @@
     <plugin name="cordova-plugin-googleplus" spec="7.0.0">
         <variable name="REVERSED_CLIENT_ID" value="100400588236-ka6g9t96f4056rkgqhrhk2oan3ugcqg7.apps.googleusercontent.com" />
     </plugin>
+    <plugin name="cordova-android-support-gradle-release" spec="^2.0.1">
+        <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
+    </plugin>
     <engine name="browser" spec="5.0.4" />
+    <engine name="android" spec="^7.1.4" />
 </widget>

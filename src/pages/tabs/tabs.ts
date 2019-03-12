@@ -5,6 +5,7 @@ import { Search } from '../search/search';
 import { Notifications } from '../notifications/notifications';
 import { Profile } from '../profile/profile';
 import { PropertyListPage } from '../property-list/property-list';
+import { UploadImagePage } from '../upload-image/upload-image';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -15,7 +16,7 @@ export class TabsPage {
 
   tab1Root = Home;
   tab2Root = Search;
-  // tab3Root = null;
+  tab3Root = UploadImagePage;
   tab4Root = Notifications;
   tab5Root = Profile;
   tab6Root = PropertyListPage;

@@ -25,6 +25,7 @@ import { Camera } from '@ionic-native/camera';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { PropertyService } from '../providers/property-service-mock/property-service-mock';
 
+import { UploadImagePage } from '../pages/upload-image/upload-image';
 import { PropertyListPage } from '../pages/property-list/property-list';
 import { PropertyDetailPage } from '../pages/property-detail/property-detail';
 import { AdMobFree } from '@ionic-native/admob-free';
@@ -48,7 +49,8 @@ import { AdMobFree } from '@ionic-native/admob-free';
     Comments,
     TabsPage,
     PropertyListPage,
-    PropertyDetailPage
+    PropertyDetailPage,
+    UploadImagePage
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import { AdMobFree } from '@ionic-native/admob-free';
     Comments,
     TabsPage,
     PropertyListPage,
-    PropertyDetailPage
+    PropertyDetailPage,
+    UploadImagePage
   ],
   providers: [
    GooglePlus,
