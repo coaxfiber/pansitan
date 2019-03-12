@@ -50,6 +50,7 @@
     "cordova-promise-polyfill": "0.0.2",
     "ionic-angular": "3.0.1",
     "ionic-plugin-keyboard": "~2.2.1",
+    "ionic3-star-rating": "^1.1.5",
     "ionicons": "3.0.0",
     "leaflet": "^1.0.3",
     "ngx-facebook": "^2.4.0",

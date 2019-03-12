@@ -42949,6 +42949,17 @@ page-profile .edit-button:active {
   border-color: #dce2ed;
 }
 
+page-property-detail ion-slide p {
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  background-color: rgba(11, 2, 0, 0.7);
+  color: white !important;
+  padding: 2px 5px 2px 5px;
+  margin-bottom: 0;
+  border-radius: 10px;
+}
+
 page-search .searchbar {
   width: 100% !important;
 }

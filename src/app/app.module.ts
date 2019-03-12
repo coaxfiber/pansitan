@@ -30,6 +30,9 @@ import { PropertyListPage } from '../pages/property-list/property-list';
 import { PropertyDetailPage } from '../pages/property-detail/property-detail';
 import { AdMobFree } from '@ionic-native/admob-free';
 
+import { StarRatingModule } from 'ionic3-star-rating';
+import { GlobalvarsProvider } from '../providers/globalvars/globalvars';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -53,6 +56,7 @@ import { AdMobFree } from '@ionic-native/admob-free';
     UploadImagePage
   ],
   imports: [
+  StarRatingModule,
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp)
@@ -86,7 +90,8 @@ import { AdMobFree } from '@ionic-native/admob-free';
     AdMobFree,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PropertyService
+    PropertyService,
+    GlobalvarsProvider
   ]
 })
 export class AppModule {}

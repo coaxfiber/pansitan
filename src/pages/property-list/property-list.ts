@@ -6,6 +6,7 @@ import leaflet from 'leaflet';
 import {Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import {LoadingController, Loading } from 'ionic-angular';
 
 @Component({
     selector: 'page-property-list',
@@ -13,18 +14,29 @@ import 'rxjs/add/operator/catch';
 })
 export class PropertyListPage {
 
+      loading: Loading;
+
     properties: Array<any>;
     searchKey: string = "";
     viewMode: string = "list";
     map;
     markersGroup;
-    constructor(public navCtrl: NavController, public service: PropertyService, public config: Config,private http:Http) {
-     this.http.get('http://pmt.i-tugue.com/stayinn-backend/api.php?action=get_app_list')
+    constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public service: PropertyService, public config: Config,private http:Http) {
+
+       this.loading = this.loadingCtrl.create({
+        content: 'Loading farmers...',
+      });
+
+     this.http.get('http://localhost/pansit/api.php?action=get_app_list')
           .map(response => response.json())
-          .subscribe(res => this.properties = res);
+          .subscribe(res => {
+              this.properties = res;
+              this.loading.dismissAll();
+          }, error => {
+                         this.loading.dismissAll();
+                         });
           this.findAll();
     }
-        
 
 
 
@@ -96,27 +108,14 @@ export class PropertyListPage {
         }
         this.markersGroup = leaflet.layerGroup([]);
         this.properties.forEach(property => {
-            if (property.lat, property.long) {
+            if (property.lati, property.longti) {
                 var LeafIcon = leaflet.Icon.extend({
                     options: {
                         iconSize:     [24, 33]
                     }
                 });
                 var flag = new LeafIcon({iconUrl: 'assets/leaflet/images/marker-icon.png'});
-                if (property.type=='Hotel') {
-                    flag = new LeafIcon({iconUrl: 'assets/leaflet/images/hotelflag.png'});
-                }if (property.type=='Motel') {
-                    flag = new LeafIcon({iconUrl: 'assets/leaflet/images/motelflag.png'});
-                }if (property.type=='Apartment') {
-                    flag = new LeafIcon({iconUrl: 'assets/leaflet/images/apartmentflag.png'});
-                }if (property.type=='Transient') {
-                    flag = new LeafIcon({iconUrl: 'assets/leaflet/images/boardflag.png'});
-                }if (property.type=='Boarding/Bed Spacer') {
-                    flag = new LeafIcon({iconUrl: 'assets/leaflet/images/bedflag.png'});
-                }if (property.type=='Dormitory') {
-                    flag = new LeafIcon({iconUrl: 'assets/leaflet/images/dormflag.png'});
-                }
-                let marker: any = leaflet.marker([property.lat, property.long], {icon: flag}).on('click', event => this.openPropertyDetail(event.target.data));
+                let marker: any = leaflet.marker([property.lati, property.longti], {icon: flag}).on('click', event => this.openPropertyDetail(event.target.data));
                 marker.data = property;
                 this.markersGroup.addLayer(marker);
             }
