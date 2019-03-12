@@ -21,7 +21,7 @@
             activeColor = "#488aff" 
             defaultColor = "#488aff"
             readonly="true"
-            [rating]="sumLoan">
+            [rating]="finalrate">
         </ionic3-star-rating> 
         <!--<img src="{{property.picture}}"/>-->
         <ion-card-content>
@@ -53,14 +53,14 @@
                         defaultIcon = "ios-star-outline"
                         activeColor = "#488aff" 
                         defaultColor = "#488aff"
-                        readonly="false"
+                        readonly="{{ ctrrate }}"
                         [rating]="yourrate">
                     </ionic3-star-rating> 
                 </ion-note>
             </ion-item>
             <ion-item>
-                <button ion-button block item-center style="width: 50%;" *ngIf="checkfav==0" (click)="favorites()">Add to Favorites</button>
-                <button ion-button block outline item-center style="width: 50%;" *ngIf="checkfav==1"  (click)="favorites()">Remove from Favorites</button>
+                <button ion-button block  style="width: 100%;" *ngIf="checkfav==0" (click)="favorites()">Add to Favorites</button>
+                <button ion-button block outline  style="width: 100%;" *ngIf="checkfav==1"  (click)="favorites()">Remove from Favorites</button>
             </ion-item>
         </ion-list>
 

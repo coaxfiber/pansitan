@@ -16,49 +16,61 @@ import { GlobalvarsProvider } from '../../providers/globalvars/globalvars';
 })
 export class PropertyDetailPage {
 
-    email = "elton@gmail.co22m"
+    email = ""
 
+    ctrrate = false;
+    fav:any;
     checkfav=0;
     checkrate=0;
     loading: Loading;
     property: any;
     image: any;
     rate: any;
-    length;
-    ratelength;
-    sumLoan;
+    length=0;
+    ratelength=0;
+    sumLoan = 0;
     yourrate = 0;
+    yourrateid=0;
+    finalrate=0;
     constructor( global:GlobalvarsProvider,private alertCtrl: AlertController,public loadingCtrl: LoadingController, public events: Events,public actionSheetCtrl: ActionSheetController,private http:Http, public navCtrl: NavController, public navParams: NavParams, public propertyService: PropertyService, public toastCtrl: ToastController, public admob: AdMobFree) {
         this.property = this.navParams.data;
+      this.ctrrate = false;
       this.loading = this.loadingCtrl.create({
+        content: 'Loading...',
       });
 
 
-      this.email = "elton@gmail.co22m";
+      this.email = "elton@gmail.com";
 
-         this.http.get('http://localhost/pansit/api.php?action=getimage&g=2&id='+this.property.pansitanid)
+         this.http.get('http://localhost/pansit/api.php?action=getimage&g=1&id='+this.property.pansitanid+'&email='+this.email)
           .map(response => response.json())
           .subscribe(res => {
-
             this.image = res.image;
             this.rate = res.rate;
+
             this.length = this.image.length;
-            this.ratelength = this.rate.length;
+
+            if (this.rate!=null) {
+              this.ratelength = this.rate.length;
+            }
             this.loading.dismissAll();
-            
-            this.sumLoan=0;
+
             for (var index = 0; index < this.ratelength; index++) {
                  var element = this.rate[index];
                  this.sumLoan = this.sumLoan + parseInt(element.rate);
                  if (element.email==this.email) {
                     this.checkrate=1;
                     this.yourrate = element.rate;
+                    this.yourrateid = element.rateid;
                  }
+            }
+            this.finalrate = this.sumLoan/this.ratelength;
+            console.log(res.fav)
+            if (res.fav != null) {
+              this.checkfav=1;
+              this.fav = res.fav;
+            }
 
-              }
-          this.sumLoan = this.sumLoan/this.ratelength;
-
-          console.log(this.checkrate)
 
           },error => {
             this.presentAlert("Something went wrong!");
@@ -66,7 +78,13 @@ export class PropertyDetailPage {
            } 
            );
 
-         events.subscribe('star-rating:changed', (starRating) => {this.rating(starRating)});
+         events.subscribe('star-rating:changed', (starRating) => {
+           if (this.ctrrate == false) {
+
+             this.ctrrate = true;
+             this.rating(starRating); 
+           }
+         });
         //this.showBanner();
     }
 
@@ -81,13 +99,22 @@ presentAlert(val:any) {
           }
 
 favorites(){
+
+  this.loading = this.loadingCtrl.create({
+        content: 'Loading...',
+      });
   if (this.checkfav == 1) {
-    this.http.get('http://localhost/pansit/api.php?action=removefav&type=1&email=' +this.email+ '&id='+this.property.pansitanid)
+    this.http.get('http://localhost/pansit/api.php?action=removefave&type=1&email=' +this.email+ '&id='+this.property.pansitanid)
           .map(response => response.json())
           .subscribe(res => {
-            console.log(res)
-                   this.checkrate = 0;
+            if (res.status == "success") {
+              // code...
+                   this.checkfav = 0;
                    this.presentToast("Removed from Favorites");
+                }else
+                {
+                      this.presentToast("Oops! Something went wrong.");
+                  }
              },error => {
             this.presentToast("Oops! Something went wrong.");
            } 
@@ -95,12 +122,18 @@ favorites(){
 
   }else{
 
-    this.http.get('http://localhost/pansit/api.php?action=savefav&type=1&email=' +this.email+ '&id='+this.property.pansitanid)
+    this.http.get('http://localhost/pansit/api.php?action=savefave&type=1&email=' +this.email+ '&id='+this.property.pansitanid)
           .map(response => response.json())
           .subscribe(res => {
             console.log(res)
-                   this.checkrate = 1;
+                    if (res.status == "success") {
+              // code...
+                   this.checkfav = 1;
                    this.presentToast("Added to Favorites");
+                }else
+                {
+                      this.presentToast("Oops! Something went wrong.");
+                  }
              },error => {
             this.presentToast("Oops! Something went wrong.");
            } 
@@ -110,36 +143,57 @@ favorites(){
 
 rating(rate){
   this.loading = this.loadingCtrl.create({
+        content: 'Loading...',
       });
   if (this.checkrate == 0) {
     this.http.get('http://localhost/pansit/api.php?action=ratingadd&rate='+rate+'&email=' +this.email+ '&id='+this.property.pansitanid)
           .map(response => response.json())
           .subscribe(res => {
-            console.log(res)
-            console.log(res)
+                   this.loading.dismissAll();
+            if (res.status == "success") {
+                  this.loading.dismissAll();
                    this.checkrate = 1;
-                    this.loading.dismissAll();
                    this.presentToast("Rated");
                    this.yourrate = rate;
+                   this.ratelength=this.ratelength+1;
+                   this.sumLoan=this.sumLoan+rate;
+                   this.finalrate = (this.sumLoan)/(this.ratelength);
+                   this.ctrrate = false;
+              }else{
+                  this.presentToast("Oops! Something went wrong.");
+              }
              },error => {
                   this.loading.dismissAll();
                   this.presentToast("Oops! Something went wrong.");
+                   this.ctrrate = false;
            } 
            );
 
   }else{
-
-    this.http.get('http://localhost/pansit/api.php?action=savefav&type=1&email=' +this.email+ '&id='+this.property.pansitanid)
+    this.http.get('http://localhost/pansit/api.php?action=ratingedit&rateid='+this.yourrateid+'&rate='+rate+'&email=' +this.email+ '&id='+this.property.pansitanid)
           .map(response => response.json())
           .subscribe(res => {
-            console.log(res)
-                   this.checkrate = 0;
-                   this.presentToast("Added to Favorites");
+             this.loading.dismissAll();
+            if (res.status == "success") {
+                   this.presentToast("Rate Updated");
+                   this.sumLoan = this.sumLoan - this.yourrate;
+                   this.yourrate = rate;
+                   this.sumLoan = this.sumLoan + this.yourrate;
+                   this.finalrate = (this.sumLoan)/(this.ratelength);
+                   this.ctrrate = false;
+              }else{
+                    this.presentToast("Rate update Failed");
+                   this.ctrrate = false;
+              }
              },error => {
-            this.presentToast("Oops! Something went wrong.");
+                   this.loading.dismissAll();
+                    this.presentToast("Oops! Something went wrong.");
+                   this.ctrrate = false;
            } 
            );
   }
+
+             
 }
 
 showBanner() {

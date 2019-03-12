@@ -22,7 +22,6 @@ import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Camera } from '@ionic-native/camera';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { PropertyService } from '../providers/property-service-mock/property-service-mock';
 
 import { UploadImagePage } from '../pages/upload-image/upload-image';
@@ -84,7 +83,6 @@ import { GlobalvarsProvider } from '../providers/globalvars/globalvars';
     UploadImagePage
   ],
   providers: [
-   GooglePlus,
     StatusBar,
     SplashScreen,
     AdMobFree,
